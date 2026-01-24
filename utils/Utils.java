@@ -8,17 +8,24 @@ public class Utils {
     public static final String TITTLE_FORMAT = "/".repeat(10);
     public static final String TITTLE_ERROR_FORMAT = "*".repeat(10);
 
+    public static void limparTerminal() {
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+}
+
+
     public static void limparBuffer(Scanner arg_sc){
         arg_sc.nextLine();
     }
 
     public static int validarEscolha(Scanner sc, int minimo, int maximo){
         while(true){
-            System.out.println("Escolha uma opção: ");
+            System.out.print("Escolha uma opção: ");
             try{
                 usuarioEscolha = sc.nextInt();
                 
                 if(usuarioEscolha < minimo || usuarioEscolha > maximo){
+                    limparTerminal();
                     System.out.println(TITTLE_ERROR_FORMAT + "OPÇÃO INVÁLIDA!" + TITTLE_ERROR_FORMAT);
                     continue;
                     
@@ -28,6 +35,7 @@ public class Utils {
                 }
                 
             } catch(InputMismatchException e){
+                limparTerminal();
                 System.out.println(TITTLE_ERROR_FORMAT + "DIGITE APENAS NÚMEROS!" + TITTLE_ERROR_FORMAT);
                 limparBuffer(sc);
                 continue;
