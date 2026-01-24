@@ -17,6 +17,8 @@ public class RegisterUser {
         public GerenciadorFichas(){};
 
         void mostrarUsuarios(){
+            Utils.limparTerminal();
+
             System.out.println(Utils.TITTLE_FORMAT + "USUÁRIOS CADASTRADOS" + Utils.TITTLE_FORMAT);
             for(int in = 0; in < id; in++){
                System.out.println(in + " -> " + users.get(in));
@@ -24,12 +26,16 @@ public class RegisterUser {
         }
 
         public void mostrarFichaTecn(FichaTecnica obj){
+            Utils.limparTerminal();
+
             System.out.println(
                 "Nome: " + getUser(obj.getIdName())+"\n"+
                 "Profissão: " + obj.profissao+"\n"+
                 "Empresa: " + obj.empresa+"\n"+
                 "Tempo Trabalhado: " + obj.tempoTrabalhado+" anos\n"
             );
+
+            sc.nextLine();
         }
 
         public void registerFichaTecnica(FichaTecnica obj){
@@ -70,7 +76,9 @@ public class RegisterUser {
         }
 
         void cadastrarUsuario(Scanner sc, GerenciadorFichas obj){
+            Utils.limparTerminal();
             int id = obj.getId();
+
             System.out.println(Utils.TITTLE_FORMAT + "CADASTRO" + Utils.TITTLE_FORMAT);
             System.out.print("Digite o seu nome: ");
             this.nome = sc.nextLine();
@@ -99,6 +107,8 @@ public class RegisterUser {
         }
 
         void cadastrarFichaTecn (Scanner sc){
+            Utils.limparTerminal();
+
             System.out.println(Utils.TITTLE_FORMAT + "CADASTRO FICHA TÉCNICA" + Utils.TITTLE_FORMAT);
             System.out.print("Sua profissão: ");
             this.profissao = sc.nextLine();
