@@ -14,6 +14,6 @@ public class Main {
             "Vamos iniciar com o seu cadastro: "
         );
         RegisterUser.main(args);
-        RegisterInventory.main(args);
+        // RegisterInventory.main(args);
     }
 }

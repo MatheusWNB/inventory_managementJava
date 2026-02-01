@@ -1,9 +1,12 @@
 package register;
 
 import java.util.Scanner;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import utils.Utils;
+import register.SqlUsers.ManagerUsers;
+
 
 public class RegisterUser {
     static Scanner sc = new Scanner(System.in);
@@ -28,10 +31,22 @@ public class RegisterUser {
         String nome;
         String senha;
 
-        public NewUser(Scanner sc){
+        public NewUser(Scanner sc, ManagerUsers admin){
             this.nome = setNome(sc);
             this.senha = setSenha(sc);
 
+            try{
+                admin.newUser(nome, senha);
+            }catch(SQLException e){
+                System.out.println(
+                    Utils.TITTLE_ERROR_FORMAT+
+                    " REGISTRO DE USUÁRIO FALHOU! "+
+                    Utils.TITTLE_ERROR_FORMAT
+                );
+
+                System.out.println(e.getMessage());
+                e.getStackTrace();
+            }
         }
 
         public String setNome(Scanner sc) {
@@ -58,9 +73,12 @@ public class RegisterUser {
     }
     public static void main(String[] args) {
         System.out.println(Utils.TITTLE_FORMAT + "CADASTRO DE USUÁRIO" + Utils.TITTLE_FORMAT);
-        NewUser user = new NewUser(sc);
-        UsersManagement.setNewNameUser(user.getName());
-        UsersManagement.setNewPasswordUser(user.getPassword());
+        ManagerUsers admin = new ManagerUsers();
+        NewUser user = new NewUser(sc, admin);
+
+        System.out.println("Nome: " + user.getName());
+        System.out.println("Senha: " + user.getPassword());
+        admin.selectAll();
 
         
     }
