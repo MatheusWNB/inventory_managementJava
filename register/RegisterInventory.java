@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import utils.Utils;
+import db.SqlInventories.ManagerInventories;
 
 public class RegisterInventory {
     static Scanner scanner = new Scanner(System.in);
