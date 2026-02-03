@@ -1,12 +1,9 @@
 package register;
 
 import java.util.Scanner;
+import db.SqlUsers.ManagerUsers;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import utils.Utils;
-import register.SqlUsers.ManagerUsers;
-
 
 public class RegisterUser {
     static Scanner sc = new Scanner(System.in);
