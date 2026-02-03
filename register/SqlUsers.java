@@ -2,13 +2,14 @@ package register;
 import java.sql.*;
 import java.util.Scanner;
 import utils.Utils;
+import env.SqlAdmin;
 
 public class SqlUsers {
 
     static class ManagerUsers{
-        private final String url;
-        private final String user;
-        private final String password; 
+        private final String url = SqlAdmin.getUrl();
+        private final String user = SqlAdmin.getUser();
+        private final String password = SqlAdmin.getPassword();
         private Connection conn;
 
         private PreparedStatement psInsert;
@@ -18,6 +19,7 @@ public class SqlUsers {
 
         public ManagerUsers(){
             try{
+
                 this.conn = DriverManager.getConnection(url, user, password);
 
                 this.psInsert = conn.prepareStatement(
