@@ -9,9 +9,9 @@ public class Utils {
     public static final String TITTLE_ERROR_FORMAT = "*".repeat(10);
 
     public static void limparTerminal() {
-    System.out.print("\033[H\033[2J");
-    System.out.flush();
-}
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 
 
     public static void limparBuffer(Scanner arg_sc){
@@ -43,5 +43,14 @@ public class Utils {
             
         }
     }
-    
+
+    public static void errorSql(Exception e){
+        System.out.println
+        (Utils.TITTLE_ERROR_FORMAT+
+            " CONEXÃO COM O DB FALHOU! "+
+            Utils.TITTLE_ERROR_FORMAT);
+
+            System.out.println(e.getMessage());
+            e.getStackTrace();
+    }
 }
