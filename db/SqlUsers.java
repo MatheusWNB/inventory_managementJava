@@ -22,23 +22,23 @@ public class SqlUsers {
                 this.conn = DriverManager.getConnection(url, user, password);
 
                 this.psInsert = conn.prepareStatement(
-                    "INSERT INTO users (name, password) VALUES (?,?)"
+                    "INSERT INTO users (username, password) VALUES (?,?)"
                 );
 
                 this.psSelectUser = conn.prepareStatement(
-                    "SELECT name FROM users WHERE name = ?",
+                    "SELECT username FROM users WHERE username = ?",
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY
                 );
                 
                 this.psLogin = conn.prepareStatement(
-                    "SELECT name, password FROM users WHERE name = ? AND password = ?",
+                    "SELECT username, password FROM users WHERE username = ? AND password = ?",
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY
                 );
 
                 this.psSelectAll = conn.prepareStatement(
-                    "SELECT id_user, name, password FROM users",
+                    "SELECT id_user, username, password FROM users",
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY
                 );
@@ -109,7 +109,7 @@ public class SqlUsers {
                 while(rsSelectAll.next()){
                     System.out.println
                     ("("+rsSelectAll.getInt("id_user")+") \n"+
-                        "Nome: " + rsSelectAll.getString("name") +"\n"+ 
+                        "Nome: " + rsSelectAll.getString("username") +"\n"+ 
                         "Senha: " + rsSelectAll.getString("password")+"\n");
 
                     System.out.println("---------------\n");
