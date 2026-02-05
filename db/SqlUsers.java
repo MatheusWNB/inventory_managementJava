@@ -45,19 +45,24 @@ public class SqlUsers {
 
             }catch(SQLException e){
                 System.out.println
-                (Utils.TITTLE_ERROR_FORMAT+
+                (Utils.ERROR+
                     " CONEXÃO COM O DB FALHOU "+
-                    Utils.TITTLE_ERROR_FORMAT);
+                    Utils.ERROR);
 
                 System.out.println(e.getMessage());
                 e.getStackTrace();
             }
         }
 
-        public void newUser(String argName, String argPassword) throws SQLException{
-            psInsert.setString(1, argName);
-            psInsert.setString(2, argPassword);
-            psInsert.executeUpdate();
+        public void newUser(String argName, String argPassword){
+            try{
+                psInsert.setString(1, argName);
+                psInsert.setString(2, argPassword);
+                psInsert.executeUpdate();
+                
+            } catch(SQLException e){
+                Utils.errorSql(e);
+            }
         }
 
         public boolean validateName(String argName){
@@ -70,9 +75,9 @@ public class SqlUsers {
 
             }catch(SQLException e){
                 System.out.println
-                (Utils.TITTLE_ERROR_FORMAT+
+                (Utils.ERROR+
                     " BUSCA NO DB FALHOU ! "+
-                    Utils.TITTLE_ERROR_FORMAT);
+                    Utils.ERROR);
 
                 System.out.println(e.getMessage());
                 e.getStackTrace();
@@ -93,9 +98,9 @@ public class SqlUsers {
 
             }catch(SQLException e){
                 System.out.println
-                (Utils.TITTLE_ERROR_FORMAT+
+                (Utils.ERROR+
                     " BUSCA NO DB FALHOU! "+
-                    Utils.TITTLE_ERROR_FORMAT);
+                    Utils.ERROR);
 
                 System.out.println(e.getMessage());
                 e.getStackTrace();
