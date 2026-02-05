@@ -7,7 +7,7 @@ import db.SqlUsers.ManagerUsers;
 import login_register.RegisterUser.*;
 import utils.Utils;
 import login_register.Login.UserLogin;
-import login_register.RegisterInven.NewInventory;;
+import login_register.RegisterInventories.NewInventory;;
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
