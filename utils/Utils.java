@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class Utils {
     private static int usuarioEscolha;
-    public static final String TITTLE_FORMAT = "/".repeat(10);
-    public static final String TITTLE_ERROR_FORMAT = "*".repeat(10);
+    public static final String TITTLE = "/".repeat(10);
+    public static final String ERROR = "*".repeat(10);
 
     public static void limparTerminal() {
         System.out.print("\033[H\033[2J");
@@ -26,7 +26,7 @@ public class Utils {
                 
                 if(usuarioEscolha < minimo || usuarioEscolha > maximo){
                     limparTerminal();
-                    System.out.println(TITTLE_ERROR_FORMAT + "OPÇÃO INVÁLIDA!" + TITTLE_ERROR_FORMAT);
+                    System.out.println(ERROR + "OPÇÃO INVÁLIDA!" + ERROR);
                     continue;
                     
                 } else if(usuarioEscolha >= minimo && usuarioEscolha <= maximo){
@@ -36,7 +36,7 @@ public class Utils {
                 
             } catch(InputMismatchException e){
                 limparTerminal();
-                System.out.println(TITTLE_ERROR_FORMAT + "DIGITE APENAS NÚMEROS!" + TITTLE_ERROR_FORMAT);
+                System.out.println(ERROR + "DIGITE APENAS NÚMEROS!" + ERROR);
                 limparBuffer(sc);
                 continue;
             }
@@ -46,9 +46,9 @@ public class Utils {
 
     public static void errorSql(Exception e){
         System.out.println
-        (Utils.TITTLE_ERROR_FORMAT+
+        (Utils.ERROR+
             " CONEXÃO COM O DB FALHOU! "+
-            Utils.TITTLE_ERROR_FORMAT);
+            Utils.ERROR);
 
             System.out.println(e.getMessage());
             e.getStackTrace();
