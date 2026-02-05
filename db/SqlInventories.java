@@ -27,7 +27,7 @@ public class SqlInventories{
                 this.conn = DriverManager.getConnection(url,user,password);
 
                 this.psInsert = conn.prepareStatement(
-                    "INSERT owner, name_inventory, password_inventory, total_items INTO inventories VALUES (?,?,?,?)"
+                    "INSERT Into inventories (owner, name_inventory, password_inventory, total_items) VALUES (?,?,?,?)"
                 );
 
                 this.psSelectInventory = conn.prepareStatement(
@@ -77,16 +77,21 @@ public class SqlInventories{
             List<String> inventories = new ArrayList<>();
 
             System.out.println(
-                Utils.TITTLE_FORMAT+
+                Utils.TITTLE+
                 " SEUS INVENTÁRIOS "+
-                Utils.TITTLE_FORMAT
+                Utils.TITTLE
             );
 
-            try(ResultSet rsSelectAll = psSelectAll.executeQuery()){
+            
+            try{
+                psSelectAll.setString(1, name);
+
+                ResultSet rsSelectAll = psSelectAll.executeQuery();
                 while(rsSelectAll.next()){
                     System.err.println(
-                        "Id: "+i+
-                        "Nome: "+rsSelectAll.getString("name_inventory")
+                        "Id: "+i+"\n"+
+                        "Nome: "+rsSelectAll.getString("name_inventory")+"\n"+
+                        "Total itens: "+rsSelectAll.getBigDecimal("total_items")+"\n"
                     );
 
                     inventories.add(rsSelectAll.getString("name_inventory"));

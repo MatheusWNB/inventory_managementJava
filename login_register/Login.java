@@ -18,11 +18,6 @@ public class Login {
             Utils.limparTerminal();
             while(true){
 
-                System.out.println
-                (Utils.TITTLE_FORMAT+
-                    " FAÇA SEU LOGIN "+
-                    Utils.TITTLE_FORMAT);
-
                 System.out.print("Seu nome de usuário: ");
                 nome = sc.nextLine();
 
@@ -32,9 +27,9 @@ public class Login {
                 validate = admin.login(nome, password);
                 if(validate == false){
                     System.out.println
-                    (Utils.TITTLE_ERROR_FORMAT+
+                    (Utils.ERROR+
                         " NOME OU SENHA INVÁLIDOS! "+
-                        Utils.TITTLE_ERROR_FORMAT);  
+                        Utils.ERROR);  
 
                     continue;
                 }   
@@ -44,9 +39,9 @@ public class Login {
 
             Utils.limparTerminal();
             System.out.println
-                (Utils.TITTLE_FORMAT+
+                (Utils.TITTLE+
                 " LOGIN EFETUADO COM SUCESSO! "+
-                Utils.TITTLE_FORMAT);
+                Utils.TITTLE);
         }
 
         public String getUserName(){

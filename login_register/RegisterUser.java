@@ -17,16 +17,6 @@ public class RegisterUser {
             this.password = setSenha(sc);
         }
 
-        void registerUser(ManagerUsers admin){
-            try{
-                admin.newUser(this.userName, this.password);
-                System.out.println("CADASTRO CONCLUIDO");
-
-            }catch(SQLException e){
-                Utils.errorSql(e);
-            }
-        }
-
         public String setNome(Scanner sc, ManagerUsers admin) {
             System.out.print("Nome de usuário: ");
             boolean any;
@@ -38,9 +28,9 @@ public class RegisterUser {
                     Utils.limparTerminal();
 
                     System.out.println
-                    (Utils.TITTLE_ERROR_FORMAT+
+                    (Utils.ERROR+
                         " ESSE NOME DE USUÁRIO JÁ ESTÁ EM USO! "+
-                        Utils.TITTLE_ERROR_FORMAT);
+                        Utils.ERROR);
 
                     continue;
                 }
