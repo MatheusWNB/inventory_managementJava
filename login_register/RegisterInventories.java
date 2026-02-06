@@ -5,7 +5,7 @@ import login_register.Login.UserLogin;
 import db.SqlInventories.ManagerInventories;
 import utils.Utils;
 
-public class RegisterInven {
+public class RegisterInventories {
     static public class NewInventory{
         private String userName;
         private String password;
