@@ -4,16 +4,16 @@ import utils.Utils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import db.env.SqlAdmin;
+import db.env.SqlAdmin.AdminInventories;
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
 public class SqlInventories{
     static public class ManagerInventories{
-        private final String url = SqlAdmin.getUrl();
-        private final String user = SqlAdmin.getUser();
-        private final String password = SqlAdmin.getPassword();
+        private final String URL = AdminInventories.getUrl();
+        private final String USER = AdminInventories.getUser();
+        private final String PASSWORD = AdminInventories.getPassword();
         private Connection conn;
 
         private PreparedStatement psInsert;
@@ -24,7 +24,7 @@ public class SqlInventories{
 
         public ManagerInventories(){
             try{
-                this.conn = DriverManager.getConnection(url,user,password);
+                this.conn = DriverManager.getConnection(URL,USER,PASSWORD);
 
                 this.psInsert = conn.prepareStatement(
                     "INSERT Into inventories (owner, name_inventory, password_inventory, total_items) VALUES (?,?,?,?)"

@@ -1,14 +1,14 @@
 package db;
 import java.sql.*;
 import java.util.Scanner;
-import db.env.SqlAdmin;
+import db.env.SqlAdmin.AdminUsers;
 import utils.Utils;
 
 public class SqlUsers {
     static public class ManagerUsers{
-        private final String url = SqlAdmin.getUrl();
-        private final String user = SqlAdmin.getUser();
-        private final String password = SqlAdmin.getPassword();
+        private final String URL = AdminUsers.getUrl();
+        private final String USER = AdminUsers.getUser();
+        private final String PASSWORD = AdminUsers.getPassword();
         private Connection conn;
 
         private PreparedStatement psInsert;
@@ -19,7 +19,7 @@ public class SqlUsers {
         public ManagerUsers(){
             try{
 
-                this.conn = DriverManager.getConnection(url, user, password);
+                this.conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
                 this.psInsert = conn.prepareStatement(
                     "INSERT INTO users (username, password) VALUES (?,?)"
