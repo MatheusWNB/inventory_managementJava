@@ -1,13 +1,12 @@
 package main;
-import java.sql.SQLException;
-import java.util.Scanner;
-
 import db.SqlInventories.ManagerInventories;
 import db.SqlUsers.ManagerUsers;
-import login_register.RegisterUser.*;
-import utils.Utils;
+import java.util.Scanner;
 import login_register.Login.UserLogin;
-import login_register.RegisterInventories.NewInventory;;
+import login_register.RegisterInventories.NewInventory;
+import login_register.RegisterUser.NewUser;
+import utils.Utils;
+;
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
