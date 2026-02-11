@@ -1,13 +1,10 @@
 package db;
 
-import utils.Utils;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import db.env.SqlAdmin.AdminInventories;
 import java.sql.*;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import utils.Utils;
 
 public class SqlInventories{
     static public class ManagerInventories{
@@ -26,17 +23,21 @@ public class SqlInventories{
             try{
                 this.conn = DriverManager.getConnection(URL,USER,PASSWORD);
 
-                this.psInsert = conn.prepareStatement(
-                    "INSERT Into inventories (owner, name_inventory, password_inventory, total_items) VALUES (?,?,?,?)"
-                );
+                this.psInsert = conn.prepareStatement("""
+                    INSERT Into inventories 
+                    (owner, name_inventory, password_inventory, total_items) 
+                    VALUES (?,?,?,?)
+                """);
 
-                this.psSelectInventory = conn.prepareStatement(
-                    "SELECT id_inventory, name_inventory FROM inventories WHERE id_inventory = ? AND name_inventory = ?"
-                );
+                this.psSelectInventory = conn.prepareStatement("""
+                    SELECT id_inventory, name_inventory FROM inventories 
+                    WHERE id_inventory = ? AND name_inventory = ?
+                """);
 
-                this.psSelectWithPass = conn.prepareStatement(
-                    "SELECT id_inventory, name_inventory, password_inventory FROM inventories WHERE id_inventory = ? AND name_inventory = ? AND password_inventory = ?"
-                );
+                this.psSelectWithPass = conn.prepareStatement("""
+                    SELECT id_inventory, name_inventory, password_inventory FROM inventories 
+                    WHERE id_inventory = ? AND name_inventory = ? AND password_inventory = ?        
+                """);
 
                 this.psSelectPass = conn.prepareStatement(
                     "SELECT password_inventory FROM inventories WHERE id_inventory = ?"
