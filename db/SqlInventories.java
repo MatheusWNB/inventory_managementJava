@@ -19,6 +19,8 @@ public class SqlInventories{
         private PreparedStatement psSelectPass;
         private PreparedStatement psSelectAll;
 
+        private List<Long> inventories = new ArrayList<>();
+
         public ManagerInventories(){
             try{
                 this.conn = DriverManager.getConnection(URL,USER,PASSWORD);
@@ -75,7 +77,7 @@ public class SqlInventories{
 
         public void printInventories(String name){
             int i = 0;
-            List<String> inventories = new ArrayList<>();
+            Long id_inventory;
 
             System.out.println(
                 Utils.TITTLE+
@@ -83,7 +85,6 @@ public class SqlInventories{
                 Utils.TITTLE
             );
 
-            
             try{
                 psSelectAll.setString(1, name);
 
@@ -95,8 +96,14 @@ public class SqlInventories{
                         "Total itens: "+rsSelectAll.getBigDecimal("total_items")+"\n"
                     );
 
-                    inventories.add(rsSelectAll.getString("name_inventory"));
+                    id_inventory = rsSelectAll.getLong("id_inventory");
+                    
+                    if(inventories.contains(id_inventory) == false)
+                        this.inventories.add(id_inventory);
+
+                    System.out.println("Id db: "+this.inventories.get(i));
                     System.out.println("----------");
+                    i++;
                 }
 
             } catch(SQLException e){
