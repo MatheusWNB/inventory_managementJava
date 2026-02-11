@@ -11,3 +11,11 @@ CREATE TABLE users(
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL
 );
+
+CREATE TABLE items(
+    id_inventory BIGINT REFERENCES inventories(id_inventory),
+    item TEXT NOT NULL,
+    amount BIGINT NOT NULL,
+    unit_price NUMERIC(10,2),
+    total_price NUMERIC(10,2)
+);
