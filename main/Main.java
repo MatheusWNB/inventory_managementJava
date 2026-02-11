@@ -6,7 +6,6 @@ import login_register.Login.UserLogin;
 import login_register.RegisterInventories.NewInventory;
 import login_register.RegisterUser.NewUser;
 import utils.Utils;
-;
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
@@ -29,11 +28,11 @@ public class Main {
                 Utils.TITTLE+ " MENU INICIAL "+ Utils.TITTLE
             );
 
-            System.out.println(
-                "(1) Fazer Login\n"+
-                "(2) Cadastrar nova conta\n"+
-                "(3) Sair do programa"
-            );
+            System.out.println("""
+            (1) Fazer Login
+            (2) Cadastrar nova conta
+            (3) Sair do programa
+            """);
 
             resposta = sc.nextLine();
 
@@ -52,8 +51,9 @@ public class Main {
                     break;
 
                 case "3":
-                    System.out.println
-                        (Utils.TITTLE+" ENCERRANDO O PROGRAMA "+Utils.TITTLE);
+                    System.out.println(
+                        Utils.TITTLE+" ENCERRANDO O PROGRAMA "+Utils.TITTLE
+                    );
             
                 default:
                     break;
@@ -62,19 +62,19 @@ public class Main {
             if(loggedIn == true){
                 break;
             }
-
-            continue;
         }
 
         while(true){
             // Utils.limparTerminal();
-            
-            System.out.println(Utils.TITTLE + " MENU ESTOQUE " + Utils.TITTLE);
             System.out.println(
-                "(1) Registrar um novo estoque\n"+
-                "(2) Visualizar e editar estoques\n"+
-                "(3) Sair do programa\n"
+                Utils.TITTLE + " MENU ESTOQUE " + Utils.TITTLE
             );
+            
+            System.out.println("""
+            (1) Registrar um novo estoque
+            (2) Visualizar e editar estoques
+            (3) Sair do programa
+            """);
             
             resposta = sc.nextLine();
 
