@@ -12,6 +12,7 @@ public class SqlEditInventory {
         private Connection conn;
 
         private PreparedStatement psInsertItem;
+        private PreparedStatement psSelectAll;
 
         public ManagerEditInventory(){
             try{
@@ -20,8 +21,12 @@ public class SqlEditInventory {
                 this.psInsertItem = conn.prepareStatement("""
                     INSERT INTO items (id_inventory, item, amount, unit_price, total_price)
                     VALUES (?,?,?,?,?)
-                """
-                );
+                """);
+
+                this.psSelectAll = conn.prepareStatement("""
+                    SELECT item, amount, unit_price, total_price FROM items
+                    WHERE id_inventory = ?
+                """);
 
             } catch(SQLException e){
                 Utils.errorSql(e);
@@ -50,5 +55,30 @@ public class SqlEditInventory {
 
             return validate;
         }   
+
+        public void printItems(long idInventory){
+            int id = 1;
+            Utils.printTittle("SEUS ITENS");
+            
+            try{
+                psSelectAll.setLong(1, idInventory);
+                ResultSet rsSelectAll = psSelectAll.executeQuery();
+
+                while(rsSelectAll.next()){
+                    System.out.println(
+                        "Id: " + id+"\n"+
+                        "Item : " + rsSelectAll.getString("item")+"\n"+
+                        "Quantidade: " + rsSelectAll.getLong("amount")+"\n"+
+                        "Preço Unitário: " + rsSelectAll.getBigDecimal("unit_price")+"\n"+
+                        "Preço Total: " + rsSelectAll.getBigDecimal("total_price")+"\n"
+                    );
+                    System.out.println("--------------");
+                    id++;
+                }
+
+            } catch(SQLException e){
+                Utils.errorSql(e);
+            }
+        }
     }
 }
