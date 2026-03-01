@@ -1,8 +1,7 @@
 package login_register;
 
-import java.util.Scanner;
-import login_register.Login.UserLogin;
 import db.SqlInventories.ManagerInventories;
+import java.util.Scanner;
 import utils.Utils;
 
 public class RegisterInventories {
@@ -52,18 +51,10 @@ public class RegisterInventories {
             boolean validate = admin.setInventory(this.userName, this.nameInventory, this.password);
 
             if (validate == true){
-                System.out.println(
-                    Utils.TITTLE+
-                    " ESTOQUE CRIADO COM SUCESSO! "+
-                    Utils.TITTLE
-                );
+                Utils.printTittle("ESTOQUE CRIADO COM SUCESSO!");
 
             } else if(validate == false){
-                System.out.println(
-                    Utils.ERROR+
-                    " NÃO FOI POSSÍVEL CRIAR SEU ESTOQUE! "+
-                    Utils.ERROR
-                );
+                Utils.printError("NÃO FOI POSSÍVEL CRIAR SEU ESTOQUE!");
             }
 
             return validate;

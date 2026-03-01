@@ -1,7 +1,7 @@
 package login_register;
 
-import java.util.Scanner;
 import db.SqlUsers.ManagerUsers;
+import java.util.Scanner;
 import utils.Utils;
 
 public class Login {
@@ -26,11 +26,7 @@ public class Login {
 
                 validate = admin.login(nome, password);
                 if(validate == false){
-                    System.out.println
-                    (Utils.ERROR+
-                        " NOME OU SENHA INVÁLIDOS! "+
-                        Utils.ERROR);  
-
+                    Utils.printError("NOME OU SENHA INVÁLIDOS!");
                     continue;
                 }   
                 this.username = nome;
@@ -38,10 +34,7 @@ public class Login {
             }
 
             Utils.limparTerminal();
-            System.out.println
-                (Utils.TITTLE+
-                " LOGIN EFETUADO COM SUCESSO! "+
-                Utils.TITTLE);
+            Utils.printTittle("LOGIN EFETUADO COM SUCESSO!");
         }
 
         public String getUserName(){
