@@ -24,9 +24,7 @@ public class Main {
         while(true){
 
             Utils.limparTerminal();
-            System.out.println(
-                Utils.TITTLE+ " MENU INICIAL "+ Utils.TITTLE
-            );
+            Utils.printTittle("MENU INICIAL");
 
             System.out.println("""
             (1) Fazer Login
@@ -38,8 +36,7 @@ public class Main {
 
             switch (resposta) {
                 case "1":
-                    System.out.println
-                        (Utils.TITTLE+" LOGIN "+Utils.TITTLE);
+                    Utils.printTittle("LOGIN");
 
                     login.login(sc, adminUsers);
                     loggedIn = true;
@@ -51,9 +48,7 @@ public class Main {
                     break;
 
                 case "3":
-                    System.out.println(
-                        Utils.TITTLE+" ENCERRANDO O PROGRAMA "+Utils.TITTLE
-                    );
+                    Utils.printTittle("ENCERRANDO O PROGRAMA");
             
                 default:
                     break;
@@ -66,9 +61,7 @@ public class Main {
 
         while(true){
             // Utils.limparTerminal();
-            System.out.println(
-                Utils.TITTLE + " MENU ESTOQUE " + Utils.TITTLE
-            );
+            Utils.printTittle("SEUS ESTOQUES");
             
             System.out.println("""
             (1) Registrar um novo estoque
