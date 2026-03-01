@@ -13,6 +13,17 @@ public class Utils {
         System.out.flush();
     }
 
+    public static void printTittle(String text){
+        System.out.println(
+            TITTLE + " " + text + " " + TITTLE
+        );
+    }
+
+    public static void printError(String text){
+        System.out.println(
+            ERROR + " " + text + " " + ERROR
+        );
+    }
 
     public static void limparBuffer(Scanner arg_sc){
         arg_sc.nextLine();
@@ -27,8 +38,7 @@ public class Utils {
                 if(usuarioEscolha < minimo || usuarioEscolha > maximo){
                     limparTerminal();
                     System.out.println(ERROR + "OPÇÃO INVÁLIDA!" + ERROR);
-                    continue;
-                    
+
                 } else if(usuarioEscolha >= minimo && usuarioEscolha <= maximo){
                     limparBuffer(sc);
                     return usuarioEscolha;
@@ -38,19 +48,13 @@ public class Utils {
                 limparTerminal();
                 System.out.println(ERROR + "DIGITE APENAS NÚMEROS!" + ERROR);
                 limparBuffer(sc);
-                continue;
             }
-            
         }
     }
 
     public static void errorSql(Exception e){
-        System.out.println
-        (Utils.ERROR+
-            " CONEXÃO COM O DB FALHOU! "+
-            Utils.ERROR);
-
-            System.out.println(e.getMessage());
-            e.getStackTrace();
+        printError("CONEXÃO COM O DB FALHOU!");
+        System.out.println(e.getMessage());
+        e.getStackTrace();
     }
 }
