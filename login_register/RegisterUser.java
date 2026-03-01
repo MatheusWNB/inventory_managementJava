@@ -1,8 +1,7 @@
 package login_register;
 
-import java.util.Scanner;
 import db.SqlUsers.ManagerUsers;
-import java.sql.SQLException;
+import java.util.Scanner;
 import utils.Utils;
 
 public class RegisterUser {
@@ -26,12 +25,7 @@ public class RegisterUser {
 
                 if(any == true){
                     Utils.limparTerminal();
-
-                    System.out.println
-                    (Utils.ERROR+
-                        " ESSE NOME DE USUÁRIO JÁ ESTÁ EM USO! "+
-                        Utils.ERROR);
-
+                    Utils.printError("ESSE NOME DE USUÁRIO JÁ ESTÁ EM USO!");
                     continue;
                 }
                 return tempNome;
