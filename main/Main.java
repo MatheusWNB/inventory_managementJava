@@ -1,6 +1,8 @@
 package main;
+import db.SqlEditInventory.ManagerEditInventory;
 import db.SqlInventories.ManagerInventories;
 import db.SqlUsers.ManagerUsers;
+import edit_inventory.EditInventory.SetItem;
 import java.util.Scanner;
 import login_register.Login.UserLogin;
 import login_register.RegisterInventories.NewInventory;
@@ -16,14 +18,16 @@ public class Main {
 
         ManagerUsers adminUsers = new ManagerUsers();
         ManagerInventories adminInventories = new ManagerInventories();
+        ManagerEditInventory admEditInventory = new ManagerEditInventory();
 
         NewUser user = null;
         UserLogin login = new UserLogin();
         NewInventory inventory = null;
+        SetItem edit = null;
         
         while(true){
 
-            Utils.limparTerminal();
+            // Utils.limparTerminal();
             Utils.printTittle("MENU INICIAL");
 
             System.out.println("""
@@ -80,8 +84,12 @@ public class Main {
                     break;
 
                 case "2":
-                    adminInventories.printInventories(login.getUserName());
-            
+                    adminInventories.printInventories(login.getUserName());  
+                    edit = new SetItem(login.getUserName());
+                    edit.regItem(admEditInventory);
+
+                    break;
+
                 default:
                     break;
             }
