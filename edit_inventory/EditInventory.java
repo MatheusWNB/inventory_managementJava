@@ -1,11 +1,8 @@
 package edit_inventory;
 
-import java.util.Scanner;
-
 import db.SqlEditInventory.ManagerEditInventory;
-import jdk.jshell.execution.Util;
+import java.util.Scanner;
 import utils.Utils;
-import login_register.RegisterUser.NewUser;
 
 public class EditInventory {
     static public class SetItem{
@@ -25,11 +22,13 @@ public class EditInventory {
             this.totalPrice = -1;
         };
 
-        public int getInventory(Scanner sc){
+        public long getInventory(Scanner sc){
             System.out.print("Digite qual inventário deseja modificar: ");
             int id = sc.nextInt();
             return id;
         }
+
+        public long getInventory(){return this.idInventory;}
 
         public boolean regItem(ManagerEditInventory obj){
             Utils.printTittle("REGISTRO DE ITEM");
