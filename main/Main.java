@@ -87,6 +87,7 @@ public class Main {
                     adminInventories.printInventories(login.getUserName());  
                     edit = new SetItem(login.getUserName());
                     edit.regItem(admEditInventory);
+                    admEditInventory.printItems(edit.getInventory());
 
                     break;
 
