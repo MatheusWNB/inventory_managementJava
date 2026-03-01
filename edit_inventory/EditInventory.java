@@ -2,11 +2,10 @@ package edit_inventory;
 
 import java.util.Scanner;
 
-import db.SqlEditInventory;
+import db.SqlEditInventory.ManagerEditInventory;
 import jdk.jshell.execution.Util;
 import utils.Utils;
 import login_register.RegisterUser.NewUser;
-import env.SqlEditInventory;
 
 public class EditInventory {
     static public class SetItem{
@@ -18,9 +17,9 @@ public class EditInventory {
         private double totalPrice;
         private Scanner scInventory;
 
-        public SetItem(NewUser obj){
+        public SetItem(String userName){
             scInventory = new Scanner(System.in);
-            this.user = obj.getUserName();
+            this.user = userName;
             this.idInventory = getInventory(scInventory);
             this.unitPrice = -1;
             this.totalPrice = -1;
@@ -32,14 +31,15 @@ public class EditInventory {
             return id;
         }
 
-        public boolean regItem(Scanner sc, SqlEditInventory obj){
+        public boolean regItem(ManagerEditInventory obj){
             Utils.printTittle("REGISTRO DE ITEM");
 
+            Utils.limparBuffer(scInventory);
             System.out.print("Item a ser registrado: ");
-            this.item = sc.nextLine();
+            this.item = scInventory.nextLine();
 
             System.out.print("Quantidade: ");
-            this.amount = sc.nextLong();
+            this.amount = scInventory.nextLong();
 
             int escolha;
             boolean loop = true;
@@ -50,12 +50,14 @@ public class EditInventory {
                     (1) -> Finalizar registro
                 """);
 
-                escolha = sc.nextInt();
+                escolha = scInventory.nextInt();
 
                 switch(escolha){
                     case 0:
                         System.out.print("Digite o preço do item: ");
-                        this.unitPrice = sc.nextDouble();
+                        this.unitPrice = scInventory.nextDouble();
+                        this.totalPrice = this.unitPrice * this.amount;
+
                         loop = false;
                         break;
 
@@ -65,6 +67,12 @@ public class EditInventory {
                     default:
                         Utils.printError("DIGITE UMA OPÇÃO VÁLIDA");
                 }
+
+                boolean validate;
+                validate = obj.regItem(this.idInventory, this.item, this.amount, 
+                    this.unitPrice, this.totalPrice);
+
+                return validate;
             }
         }
     }
