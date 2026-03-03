@@ -1,34 +1,36 @@
 package edit_inventory;
 
 import db.SqlEditInventory.ManagerEditInventory;
+import db.SqlInventories.ManagerInventories;
 import java.util.Scanner;
 import utils.Utils;
 
 public class EditInventory {
     static public class SetItem{
         private String user;
+        private static Scanner scInventory = new Scanner(System.in);
         private long idInventory;
         private String item;
         private long amount;
         private double unitPrice;
         private double totalPrice;
-        private Scanner scInventory;
 
-        public SetItem(String userName){
-            scInventory = new Scanner(System.in);
+        public SetItem(String userName, ManagerInventories obj){
+            this.idInventory = getInventory(obj);
             this.user = userName;
-            this.idInventory = getInventory(scInventory);
             this.unitPrice = -1;
             this.totalPrice = -1;
         };
 
-        public long getInventory(Scanner sc){
+        public long getInventory(ManagerInventories obj){
             System.out.print("Digite qual inventário deseja modificar: ");
-            int id = sc.nextInt();
-            return id;
+            int id = scInventory.nextInt();
+
+            long idInventory = obj.getInventory(id);
+            return idInventory;
         }
 
-        public long getInventory(){return this.idInventory;}
+        public long retInventory(){return this.idInventory;}
 
         public boolean regItem(ManagerEditInventory obj){
             Utils.printTittle("REGISTRO DE ITEM");
@@ -41,7 +43,7 @@ public class EditInventory {
             this.amount = scInventory.nextLong();
 
             int escolha;
-            boolean loop = true;
+            boolean validate;
             while(true){
                 System.out.println("""
                     Digite:
@@ -57,19 +59,16 @@ public class EditInventory {
                         this.unitPrice = scInventory.nextDouble();
                         this.totalPrice = this.unitPrice * this.amount;
 
-                        loop = false;
-                        break;
-
                     case 1:
-                        loop = false;
+                        validate = obj.regItem(this.idInventory, this.item, this.amount, 
+                                this.unitPrice, this.totalPrice);
+
+                        break;
 
                     default:
                         Utils.printError("DIGITE UMA OPÇÃO VÁLIDA");
+                        continue;
                 }
-
-                boolean validate;
-                validate = obj.regItem(this.idInventory, this.item, this.amount, 
-                    this.unitPrice, this.totalPrice);
 
                 return validate;
             }
