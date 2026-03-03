@@ -27,7 +27,7 @@ public class Main {
         
         while(true){
 
-            // Utils.limparTerminal();
+            Utils.limparTerminal();
             Utils.printTittle("MENU INICIAL");
 
             System.out.println("""
@@ -64,7 +64,7 @@ public class Main {
         }
 
         while(true){
-            // Utils.limparTerminal();
+            Utils.limparTerminal();
             Utils.printTittle("SEUS ESTOQUES");
             
             System.out.println("""
@@ -75,7 +75,7 @@ public class Main {
             
             resposta = sc.nextLine();
 
-            switch (resposta) {
+            switch(resposta){
                 case "1":
                     inventory = new NewInventory(login.getUserName());
                     inventory.setInfos();
@@ -84,10 +84,11 @@ public class Main {
                     break;
 
                 case "2":
+                    adminInventories.setListInventories(login.getUserName());
                     adminInventories.printInventories(login.getUserName());  
-                    edit = new SetItem(login.getUserName());
+                    edit = new SetItem(login.getUserName(), adminInventories);
                     edit.regItem(admEditInventory);
-                    admEditInventory.printItems(edit.getInventory());
+                    admEditInventory.printItems(edit.retInventory());
 
                     break;
 
