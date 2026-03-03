@@ -28,12 +28,11 @@ public class SqlInventories{
                 this.psInsert = conn.prepareStatement("""
                     INSERT Into inventories 
                     (owner, name_inventory, password_inventory, total_items) 
-                    VALUES (?,?,?,?)
+                    VALUES (?,?,?,?) RETURNING id_inventory
                 """);
 
                 this.psSelectInventory = conn.prepareStatement("""
-                    SELECT id_inventory, name_inventory FROM inventories 
-                    WHERE id_inventory = ? AND name_inventory = ?
+                    SELECT id_inventory FROM inventories WHERE owner = ?
                 """);
 
                 this.psSelectWithPass = conn.prepareStatement("""
@@ -64,6 +63,11 @@ public class SqlInventories{
                 psInsert.setInt(4, 0);
 
                 psInsert.executeUpdate();
+
+                ResultSet getId = psInsert.executeQuery();
+                while(getId.next()){
+                    inventories.add(getId.getLong("id_inventory"));
+                }
                 
                 validate = true;
 
@@ -77,7 +81,6 @@ public class SqlInventories{
 
         public void printInventories(String name){
             int i = 0;
-            Long id_inventory;
 
             System.out.println(
                 Utils.TITTLE+
@@ -92,17 +95,10 @@ public class SqlInventories{
                 while(rsSelectAll.next()){
                     System.err.println(
                         "Id: "+i+"\n"+
-                        "Nome: "+rsSelectAll.getString("name_inventory")+"\n"+
-                        "Total itens: "+rsSelectAll.getBigDecimal("total_items")+"\n"
+                        "Name: "+rsSelectAll.getString("name_inventory")+"\n"+
+                        "Total items: "+rsSelectAll.getBigDecimal("total_items")+"\n"
                     );
 
-                    id_inventory = rsSelectAll.getLong("id_inventory");
-                    
-                    if(inventories.contains(id_inventory) == false)
-                        this.inventories.add(id_inventory);
-
-                    System.out.println("Id db: "+this.inventories.get(i));
-                    System.out.println("----------");
                     i++;
                 }
 
@@ -110,5 +106,20 @@ public class SqlInventories{
                 Utils.errorSql(e);
             }
         }
+
+        public void setListInventories(String owner){
+            try{
+                psSelectInventory.setString(1, owner);
+                ResultSet rsSelectInventory = psSelectInventory.executeQuery();
+
+                while(rsSelectInventory.next()){
+                    this.inventories.add(rsSelectInventory.getLong("id_inventory"));
+                }
+            } catch(SQLException e){
+                Utils.errorSql(e);
+            }
+        }
+
+        public long getInventory(int id){return this.inventories.get(id);}
     }
 }
