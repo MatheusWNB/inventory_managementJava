@@ -62,9 +62,8 @@ public class SqlInventories{
                 psInsert.setString(3, password);
                 psInsert.setInt(4, 0);
 
-                psInsert.executeUpdate();
-
                 ResultSet getId = psInsert.executeQuery();
+
                 while(getId.next()){
                     inventories.add(getId.getLong("id_inventory"));
                 }
