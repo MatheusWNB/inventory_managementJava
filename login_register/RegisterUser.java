@@ -17,25 +17,48 @@ public class RegisterUser {
         }
 
         public String setNome(Scanner sc, ManagerUsers admin) {
-            System.out.print("Nome de usuário: ");
             boolean any;
+            String name;
+            
             while(true){
-                String tempNome = sc.nextLine();
-                any = admin.validateName(tempNome);
+                Utils.limparTerminal();
+
+                System.out.print("Nome de usuário (mínimo 8 caracteres): ");
+                name = sc.nextLine();
+                
+                if(name.length() < 8 || name.isBlank() == true){
+                    Utils.printError("NOME INVÁLIDO! POR FAVOR, TENTE NOVAMENTE");
+                    continue;
+                }
+
+                any = admin.validateName(name);
 
                 if(any == true){
                     Utils.limparTerminal();
                     Utils.printError("ESSE NOME DE USUÁRIO JÁ ESTÁ EM USO!");
                     continue;
                 }
-                return tempNome;
+
+                return name;
             }
         }
 
         public String setSenha(Scanner sc) {
-            System.out.print("Sua senha: ");
-            String tempSenha = sc.nextLine();
-            return tempSenha;
+            String password;
+
+            while(true){
+                Utils.limparTerminal();
+
+                System.out.print("Sua senha (mínimo 6 caracteres): ");
+                password = sc.nextLine();   
+                
+                if(password.length() < 6 || password.isBlank() == true)
+                    Utils.printError("SENHA INVÁLIDA! POR FAVOR, TENTE NOVAMENTE");
+                else 
+                    break;
+            }
+
+            return password;
         }
 
         public String getUserName(){
