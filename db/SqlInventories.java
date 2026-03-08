@@ -64,10 +64,8 @@ public class SqlInventories{
 
                 ResultSet getId = psInsert.executeQuery();
 
-                while(getId.next()){
-                    inventories.add(getId.getLong("id_inventory"));
-                }
-                
+                inventories.add(getId.getLong("id_inventory"));
+
                 validate = true;
 
             } catch(SQLException e){
