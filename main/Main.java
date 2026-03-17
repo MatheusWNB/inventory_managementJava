@@ -26,7 +26,6 @@ public class Main {
         SetItem edit = null;
         
         while(true){
-
             Utils.limparTerminal();
             Utils.printTittle("MENU INICIAL");
 
@@ -52,8 +51,9 @@ public class Main {
                     break;
 
                 case "3":
-                    Utils.printTittle("ENCERRANDO O PROGRAMA");
-            
+                    Utils.endProc(adminUsers, adminInventories, 
+                        admEditInventory, 0);
+
                 default:
                     break;
             }
@@ -62,7 +62,7 @@ public class Main {
                 break;
             }
         }
-
+        
         while(true){
             Utils.limparTerminal();
             Utils.printTittle("SEUS ESTOQUES");
@@ -77,9 +77,10 @@ public class Main {
 
             switch(resposta){
                 case "1":
+                    boolean validate;
                     inventory = new NewInventory(login.getUserName());
                     inventory.setInfos();
-                    inventory.registerInventory(adminInventories);
+                    validate = inventory.registerInventory(adminInventories);
                     
                     break;
 
@@ -91,6 +92,10 @@ public class Main {
                     admEditInventory.printItems(edit.retInventory());
 
                     break;
+
+                case "3":
+                    Utils.endProc(adminUsers, adminInventories, 
+                        admEditInventory, 0);
 
                 default:
                     break;
