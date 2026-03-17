@@ -1,5 +1,9 @@
 package utils;
 
+import db.SqlEditInventory.ManagerEditInventory;
+import db.SqlInventories.ManagerInventories;
+import db.SqlUsers.ManagerUsers;
+import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -7,6 +11,23 @@ public class Utils {
     private static int usuarioEscolha;
     public static final String TITTLE = "/".repeat(10);
     public static final String ERROR = "*".repeat(10);
+
+    public static void endProc(ManagerUsers arg0, ManagerInventories arg1, 
+                    ManagerEditInventory arg2, int exitStatus)
+    {
+        limparTerminal();
+        try{
+            arg0.closeConnection();
+            arg1.closeConnection();
+            arg2.closeConnection();
+
+        } catch(SQLException e){
+            errorSql(e);
+        }
+
+        printTittle("PROGRAMA ENCERRADO!");
+        System.exit(exitStatus);
+    }
 
     public static void limparTerminal() {
         System.out.print("\033[H\033[2J");
