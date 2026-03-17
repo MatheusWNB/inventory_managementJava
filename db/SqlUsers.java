@@ -1,7 +1,6 @@
 package db;
-import java.sql.*;
-import java.util.Scanner;
 import db.env.SqlAdmin.AdminUsers;
+import java.sql.*;
 import utils.Utils;
 
 public class SqlUsers {
@@ -123,6 +122,10 @@ public class SqlUsers {
             }catch(SQLException e){
                 System.out.println("Não foi possível realizar a busca!");
             }
+        }
+
+        public void closeConnection() throws SQLException{
+            conn.close();
         }
     }
 }

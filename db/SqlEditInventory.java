@@ -80,5 +80,9 @@ public class SqlEditInventory {
                 Utils.errorSql(e);
             }
         }
+
+        public void closeConnection() throws SQLException{
+            conn.close();
+        }
     }
 }

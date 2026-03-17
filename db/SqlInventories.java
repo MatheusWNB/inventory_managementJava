@@ -118,5 +118,9 @@ public class SqlInventories{
         }
 
         public long getInventory(int id){return this.inventories.get(id);}
+
+        public void closeConnection() throws SQLException{
+            conn.close();
+        }
     }
 }
